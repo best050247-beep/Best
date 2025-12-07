@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>โปรแกรมร้านอาหาร - รายการเมนู</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+      }
+      .menu-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .main-menu {
+        background: linear-gradient(45deg, #ff9a9e, #fecfef);
+      }
+      .drink-menu {
+        background: linear-gradient(45deg, #a8edea, #fed6e3);
+      }
+      .menu-item {
+        display: inline-block;
+        width: 200px;
+        margin: 10px;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .menu-item:hover {
+        transform: translateY(-5px);
+      }
+      .price {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #e74c3c;
+      }
+      #order-summary {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+      #total {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #27ae60;
+      }
+      button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #2980b9;
+      }
+      .discount-btn {
+        background: #f39c12;
+      }
+      .discount-btn:hover {
+        background: #e67e22;
+      }
+      .receipt {
+        background: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🍽️ โปรแกรมร้านอาหาร "美味 Thai Kitchen"</h1>
+
+      <div class="menu-section main-menu">
+        <h2>🍛 เมนูหลัก 10 รายการ</h2>
+        <div>
+          <div class="menu-item" onclick="addItem('ต้มยำกุ้ง', 89)">
+            <strong>ต้มยำกุ้ง</strong><br /><span class="price">฿89</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ผัดไทยกุ้งสด', 79)">
+            <strong>ผัดไทยกุ้งสด</strong><br /><span class="price">฿79</span>
+          </div>
+          <div class="menu-item" onclick="addItem('กะเพราเนื้อ', 69)">
+            <strong>กะเพราเนื้อ</strong><br /><span class="price">฿69</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ชุบแป้งทอด', 85)">
+            <strong>ชุบแป้งทอด</strong><br /><span class="price">฿85</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ข้าวผัดทะเล', 75)">
+            <strong>ข้าวผัดทะเล</strong><br /><span class="price">฿75</span>
+          </div>
+          <div class="menu-item" onclick="addItem('แกงเขียวหวานไก่', 65)">
+            <strong>แกงเขียวหวานไก่</strong><br /><span class="price">฿65</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ยำวุ้นเส้น', 59)">
+            <strong>ยำวุ้นเส้น</strong><br /><span class="price">฿59</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ต้มจืดเต้าหู้หมูสับ', 55)">
+            <strong>ต้มจืดเต้าหู้</strong><br /><span class="price">฿55</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ผัดกะเพราไก่', 59)">
+            <strong>ผัดกะเพราไก่</strong><br /><span class="price">฿59</span>
+          </div>
+          <div class="menu-item" onclick="addItem('ข้าวเหนียวมะม่วง', 45)">
+            <strong>ข้าวเหนียวมะม่วง</strong><br /><span class="price"
+              >฿45</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-section drink-menu">
+        <h2>🥤 เมนูเครื่องดื่ม 4 รายการ</h2>
+        <div>
+          <div class="menu-item" onclick="addItem('ชาเย็น', 25)">
+            <strong>ชาเย็น</strong><br /><span class="price">฿25</span>
+          </div>
+          <div class="menu-item" onclick="addItem('น้ำมะนาวโซดา', 35)">
+            <strong>น้ำมะนาวโซดา</strong><br /><span class="price">฿35</span>
+          </div>
+          <div class="menu-item" onclick="addItem('กาแฟเย็น', 40)">
+            <strong>กาแฟเย็น</strong><br /><span class="price">฿40</span>
+          </div>
+          <div class="menu-item" onclick="addItem('น้ำเปล่า', 10)">
+            <strong>น้ำเปล่า</strong><br /><span class="price">฿10</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="order-summary">
+        <h3>📋 สรุปรายการสั่งซื้อ</h3>
+        <div id="order-list"></div>
+        <p>ยอดรวม: <span id="subtotal">฿0</span></p>
+        <p>ส่วนลด: <span id="discount">฿0</span></p>
+        <p>VAT 7%: <span id="vat">฿0</span></p>
+        <p id="total">ยอดสุทธิ: ฿0</p>
+        <button onclick="applyDiscount(10)">ลด 10 บาท</button>
+        <button onclick="applyDiscount(20)">ลด 20 บาท</button>
+        <button onclick="clearOrder()">ลบรายการทั้งหมด</button>
+        <button onclick="printReceipt()">พิมพ์ใบเสร็จ</button>
+      </div>
+
+      <div id="receipt" class="receipt">
+        <h3>🧾 ใบเสร็จรับเงิน</h3>
+        <div id="receipt-content"></div>
+      </div>
+    </div>
+
+    <script>
+      let order = [];
+      let discount = 0;
+
+      function addItem(name, price) {
+        order.push({ name, price, qty: 1 });
+        updateOrder();
+      }
+
+      function updateOrder() {
+        let subtotal = order.reduce(
+          (sum, item) => sum + item.price * item.qty,
+          0
+        );
+        let vat = subtotal * 0.07;
+        let total = subtotal + vat - discount;
+
+        document.getElementById("order-list").innerHTML = order
+          .map(
+            (item, i) =>
+              `<div>${item.name} x${item.qty} = ฿${(
+                item.price * item.qty
+              ).toFixed(0)} 
+                <button onclick="removeItem(${i})" style="background:#e74c3c;">ลบ</button></div>`
+          )
+          .join("<br>");
+
+        document.getElementById("subtotal").textContent = `฿${subtotal.toFixed(
+          0
+        )}`;
+        document.getElementById("discount").textContent = `฿${discount.toFixed(
+          0
+        )}`;
+        document.getElementById("vat").textContent = `฿${vat.toFixed(0)}`;
+        document.getElementById(
+          "total"
+        ).textContent = `ยอดสุทธิ: ฿${total.toFixed(0)}`;
+      }
+
+      function removeItem(index) {
+        order.splice(index, 1);
+        updateOrder();
+      }
+
+      function applyDiscount(amount) {
+        discount = Math.min(
+          amount,
+          order.reduce((sum, item) => sum + item.price * item.qty, 0)
+        );
+        updateOrder();
+      }
+
+      function clearOrder() {
+        order = [];
+        discount = 0;
+        updateOrder();
+      }
+
+      function printReceipt() {
+        const subtotal = order.reduce(
+          (sum, item) => sum + item.price * item.qty,
+          0
+        );
+        const vat = subtotal * 0.07;
+        const total = subtotal + vat - discount;
+
+        document.getElementById("receipt-content").innerHTML = `
+                <p><strong>美味 Thai Kitchen</strong></p>
+                <p>วันที่: ${new Date().toLocaleString("th-TH")}</p>
+                <hr>
+                ${order
+                  .map(
+                    (item) =>
+                      `<p>${item.name} x${item.qty} = ฿${(
+                        item.price * item.qty
+                      ).toFixed(0)}</p>`
+                  )
+                  .join("")}
+                <hr>
+                <p>ยอดรวม: ฿${subtotal.toFixed(0)}</p>
+                <p>ส่วนลด: -฿${discount.toFixed(0)}</p>
+                <p>VAT 7%: ฿${vat.toFixed(0)}</p>
+                <p><strong>รวมทั้งสิ้น: ฿${total.toFixed(0)}</strong></p>
+                <hr>
+                <p>ขอบคุณที่ใช้บริการ 🙏</p>
+            `;
+        document.getElementById("receipt").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
